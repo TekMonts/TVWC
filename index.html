@@ -1,0 +1,78 @@
+<header>
+<link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+<script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+let arr = [
+    { name:"VTV1", value:"https://vips-livecdn.fptplay.net/hda1/vtv1hd_vhls.smil/chunklist_b5000000.m3u8"},
+    { name:"VTV2", value:"https://vips-livecdn.fptplay.net/hda1/vtv2_vhls.smil/chunklist_b5000000.m3u8"},
+    { name:"VTV3", value:"https://vips-livecdn.fptplay.net/hda1/vtv3hd_vhls.smil/chunklist_b5000000.m3u8"},
+    { name:"VTV5", value:"http://drfamaga5qliv.vcdn.cloud/vtv05/vtv05@1080p.m3u8"},
+    { name:"VTV6", value:"https://vips-livecdn.fptplay.net/hda1/vtv6hd_vhls.smil/chunklist_b5000000.m3u8"}
+];
+
+function parse_query_string(query) {
+  var vars = query.split("&");
+  var query_string = {};
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    var key = decodeURIComponent(pair.shift());
+    var value = decodeURIComponent(pair.join("="));
+    // If first entry with this name
+    if (typeof query_string[key] === "undefined") {
+      query_string[key] = value;
+      // If second entry with this name
+    } else if (typeof query_string[key] === "string") {
+      var arr = [query_string[key], value];
+      query_string[key] = arr;
+      // If third or later entry with this name
+    } else {
+      query_string[key].push(value);
+    }
+  }
+  return query_string;
+}
+
+$(document.body).on('change',"#selectChannel",function (e) {
+   var optVal= $("#selectChannel option:selected").val();
+   console.log(optVal);
+   window.location.replace("?channel="+optVal); 
+})
+
+$(function() {
+	var query = window.location.search.substring(1);
+	var qs = parse_query_string(query);
+	<!-- console.log("qs: " + qs); -->
+	var cn = 'VTV6';
+	if(qs.hasOwnProperty('channel')) {
+		<!-- console.log("channel: " + qs.channel); -->
+		cn = qs.channel;
+	}
+	let obj = arr.find(o => o.name === cn);
+	<!-- console.log(obj); -->
+	document.title= 'Watch TV ' + obj.name + ' free by TekMonts!';
+	document.getElementById("tvsource").src=obj.value;
+	document.getElementById("selectChannel").value=obj.name;
+	var player = videojs('tvplay');
+	player.play();
+	
+});
+</script>
+</header>
+<body>
+<center id="maintv">
+<video id='tvplay' class="video-js" width="600" height="450" controls autoplay muted>
+<source id='tvsource' type="application/x-mpegURL">
+</video>
+</center>
+<p align="center">Select the channel to watch: 
+<select id='selectChannel'>
+    <option value="VTV1">VTV1</option>
+    <option value="VTV2">VTV2</option>
+    <option value="VTV3">VTV3</option>
+    <option value="VTV5">VTV5</option>
+    <option value="VTV6">VTV6</option>
+</select>
+</p>
+</body>
