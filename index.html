@@ -24,7 +24,7 @@
         value: "https://vips-livecdn.fptplay.net/hda1/vtv3hd_vhls.smil/chunklist_b5000000.m3u8"
       }, {
         name: "VTV5",
-        value: "https://drfamaga5qliv.vcdn.cloud/vtv05/vtv05@1080p.m3u8"
+        value: "https://vips-livecdn.fptplay.net/hda2/vtv5hd_vhls.smil/chunklist_b5000000.m3u8"
       }, {
         name: "VTV6",
         value: "https://vips-livecdn.fptplay.net/hda1/vtv6hd_vhls.smil/chunklist_b5000000.m3u8"
@@ -70,7 +70,7 @@
         document.title = 'Watch TV ' + obj.name + ' ' + quality + ' free by TekMonts!';
         var srcTV = obj.value;
         if (quality == 'HD') {
-          srcTV = srcTV.replace('b5000000', 'b2500000');
+          srcTV = srcTV.replace('50', '25');
         }
         $('input[name=qlt][value=' + quality + ']').prop("checked", true);
         document.getElementById("tvsource").src = srcTV;
