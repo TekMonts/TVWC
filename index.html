@@ -9,11 +9,36 @@
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 		<script src="script.js"></script>
+		<style>
+			.embed-responsive {
+				position: relative;
+				display: block;
+				width: 90%;
+				padding: 0;
+				overflow: hidden;
+			}
+			.embed-responsive .embed-responsive-item, .embed-responsive embed, .embed-responsive iframe, .embed-responsive object, .embed-responsive video {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border: 0;
+			}
+			.embed-responsive-16by9::before {
+				padding-top: 56.25%;
+			}
+			.embed-responsive::before {
+				display: block;
+				content: "";
+			}
+		</style>
 	</head>
 	<body>
 		<div id="mainPlayer" class="d-flex justify-content-center">
-			<div id="mainFrame" width="640" height="400">
-			<iframe id="Myiframe" width="640" height="400" allowfullscreen="">
+			<div id="mainFrame" style="background: #000; min-height: 250px !important;" class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" id="myIframe" allowfullscreen="">
 			</iframe>
 			</div>
 			</div> &nbsp; <div id="functional" class="container text-center">Chọn kênh để xem: <select id='selectChannel' onchange="redirect();">
