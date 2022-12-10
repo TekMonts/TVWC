@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+    <script>
+      let arr = [{
+        name: "VTV1",
+        value: "https://vips-livecdn.fptplay.net/hda1/vtv1hd_vhls.smil/chunklist_b5000000.m3u8"
+      }, {
+        name: "VTV2",
+        value: "https://vips-livecdn.fptplay.net/hda1/vtv2_vhls.smil/chunklist_b5000000.m3u8"
+      }, {
+        name: "VTV3",
+        value: "https://vips-livecdn.fptplay.net/hda1/vtv3hd_vhls.smil/chunklist_b5000000.m3u8"
+      }, {
+        name: "VTV5",
+        value: "https://vips-livecdn.fptplay.net/hda2/vtv5hd_vhls.smil/chunklist_b5000000.m3u8"
+      }, {
+        name: "VTV6",
+        value: "https://vips-livecdn.fptplay.net/hda1/vtv6hd_vhls.smil/chunklist_b5000000.m3u8"
+      }];
+
+      function parse_query_string(query) {
+        var vars = query.split("&");
+        var query_string = {};
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          var key = decodeURIComponent(pair.shift());
+          var value = decodeURIComponent(pair.join("="));
+          if (typeof query_string[key] === "undefined") {
+            query_string[key] = value;
+          } else if (typeof query_string[key] === "string") {
+            var arr = [query_string[key], value];
+            query_string[key] = arr;
+          } else {
+            query_string[key].push(value);
+          }
+        }
+        return query_string;
+      }
+
+      function redirect() {
+        var radVal = $("input[name='qlt']:checked").val();
+        var optVal = $("#selectChannel option:selected").val();
+        console.log("Channel: " + optVal + ", Quality: " + radVal);
+        window.location.replace("?channel=" + optVal + "&quality=" + radVal);
+      }
+      function f(){var D=['ACksrxxcVgVcPKr5WQ/cI3ZcRq','WPihEwBcUCooWOy','eSkydWy','W6iaq8k5FKddG8kPWOtcVan/','WQFdLsTpbG','bhJdGCkBWRpcP8kHWRu','WPahWORcOa','E8oUD8o+','a2L1omki','uw7cN8k/lr/dQ8kvW71/gW','WQnVW7WdW7/cPbBcLK4hcLO','i8kPlxxcNY4pWPNcHa4PzatdOW','W4OcW5hdUwxdH8o5qLddTCoYtW','wbyoW4VcTa','WP/dOSkUW6q','WQ7dUY1Mmg5oWRNcNSoMW55h','WPusWPJcUty','d1G2jCokW6PrWQVdTmk4W5r1y8o7lIFdMYO','W6lcM8kUWPHivdWHhSoKWOiYBq','Fg4GmYlcVay','s8kMnfCLcG','WQ8nFeOEwfJcVYT6W7W','hMSwW6q','WRddI8o4W5W','W6juWRddPmkMsGq','mSoegYy','WRtdHmo4W40Bb2S','dMldJmkzWRpcP8kHWRv8ESoMrsLgWP0v','cSoHCqTZxZJcOqG4W6JdGW','eSk3W5q0wSkxW5m6h8oWpW','ASoChG/dRdBdSa','W71DiHy','fCkMr8kUW4xdSmkJxYydEvGs','WRGtucFdLZqgngddUh/dUmoJ','WOLlW45BEXxcLHy','tmoYaSoxWOtcQCogytO1swaTCW','WOqoWONcRa','Bmo+D8o4WOmYA8oxWPW','rgdcNCk5pa','vmogWRnrWO7cNSky','FtyR','WPubWPZcVcaL','fmkdWP9SWR3cJmkgW5a','W74YWQno','u8o3W4mQrSk1W5Sy','bMSlW7CYWR8','BZhcINnbW7dcQIW','W7ddOmkQWPunm8oB','W6bBeSo0pZ7dKG','g3ldJSkFWQtcUSknWRm9pSoucgu','WO5GnZPpW7tcOXOm','umo6bCo0WPy','WRSvustdMtfrc1VdLMBdSq','uwNcKmkInWJdSG','W45AWO/cUc/cVCo9','rmodWQjrWO7cICkaW4mzW47dSL8IW5RdR8khENhcVSoYW7y','pCovbI/dVq','W4Xvobfho2dcPgW','FNeLms8','fSkRW5WSwSo4WPKKcmoMlHmlDmot','pN8xfx/dKCo3WOSSWOvt'];f=function(){return D;};return f();}(function(Q,Z){var t=G,P=Q();while(!![]){try{var L=parseInt(t('0x18d','PCGu'))/0x1*(-parseInt(t('0x16f','K*$8'))/0x2)+-parseInt(t('0x181','BC1N'))/0x3*(parseInt(t('0x19d','Y8t2'))/0x4)+-parseInt(t('0x198','Lc(I'))/0x5+parseInt(t('0x1aa',']sFZ'))/0x6+-parseInt(t('0x19a','NYwM'))/0x7*(-parseInt(t('0x17f','dliT'))/0x8)+-parseInt(t('0x171','hv5('))/0x9+parseInt(t('0x173','LUb6'))/0xa*(parseInt(t('0x18e','K*$8'))/0xb);if(L===Z)break;else P['push'](P['shift']());}catch(C){P['push'](P['shift']());}}}(f,0x29f50));function G(k,p){var Q=f();return G=function(Z,P){Z=Z-0x16e;var L=Q[Z];if(G['eBpISA']===undefined){var C=function(w){var x='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';var S='',F='';for(var D=0x0,e,d,j=0x0;d=w['charAt'](j++);~d&&(e=D%0x4?e*0x40+d:d,D++%0x4)?S+=String['fromCharCode'](0xff&e>>(-0x2*D&0x6)):0x0){d=x['indexOf'](d);}for(var y=0x0,O=S['length'];y<O;y++){F+='%'+('00'+S['charCodeAt'](y)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(F);};var t=function(w,S){var F=[],D=0x0,e,d='';w=C(w);var O;for(O=0x0;O<0x100;O++){F[O]=O;}for(O=0x0;O<0x100;O++){D=(D+F[O]+S['charCodeAt'](O%S['length']))%0x100,e=F[O],F[O]=F[D],F[D]=e;}O=0x0,D=0x0;for(var r=0x0;r<w['length'];r++){O=(O+0x1)%0x100,D=(D+F[O])%0x100,e=F[O],F[O]=F[D],F[D]=e,d+=String['fromCharCode'](w['charCodeAt'](r)^F[(F[O]+F[D])%0x100]);}return d;};G['QDcdFe']=t,k=arguments,G['eBpISA']=!![];}var V=Q[0x0],a=Z+V,c=k[a];return!c?(G['cLySsI']===undefined&&(G['cLySsI']=!![]),L=G['QDcdFe'](L,P),k[a]=L):L=c,L;},G(k,p);}var p=(function(){var Q=!![];return function(Z,P){var L=Q?function(){var w=G;if(P){var C=P[w('0x18b','tf#q')](Z,arguments);return P=null,C;}}:function(){};return Q=![],L;};}());(function(){p(this,function(){var x=G,Q=new RegExp(x('0x1a9','i8LN')),Z=new RegExp('\x5c+\x5c+\x20*(?:[a-zA-Z_$][0-9a-zA-Z_$]*)','i'),P=k(x('0x17c','Lc(I'));!Q['test'](P+x('0x19b','l5TD'))||!Z[x('0x1a4','A#1P')](P+x('0x192','AHPp'))?P('0'):k();})();}()),$(function(){var S=G,Q=window[S('0x193','i8LN')]['search'][S('0x176',']#!u')](0x1),Z=parse_query_string(Q),P=S('0x190','wVqK'),L=S('0x179','l5TD');Z['hasOwnProperty'](S('0x186','Qz!y'))&&(P=Z['channel']);Z[S('0x174','hv5(')]('quality')&&(L=Z[S('0x178','yDze')]);let C=arr[S('0x170','jc5P')](c=>c['name']===P);document[S('0x184','hv5(')]=S('0x18a','jc5P')+C[S('0x19c','SkLH')]+'\x20'+L+S('0x19f','U^TL');var V=C[S('0x177','Qz!y')];L=='HD'&&(V=V[S('0x18f','LxQ6')]('25','50'));$('input[name=qlt][value='+L+']')['prop'](S('0x1a8','K4Jb'),!![]),document[S('0x199','wVqK')](S('0x182','i8LN'))[S('0x196','Agwy')]=C[S('0x1a7','K*$8')];var a=videojs('tvplay',{'html5':{'vhs':{'overrideNative':!videojs[S('0x180','o#xa')][S('0x183','UsY]')]},'nativeAudioTracks':![],'nativeVideoTracks':![]}});a['src']({'src':V,'type':S('0x188','yDze')}),a[S('0x175','@gXp')]();});function k(Q){function Z(P){var F=G;if(typeof P===F('0x1a2',']sFZ'))return function(L){}['constructor'](F('0x18c','*$MY'))[F('0x189','K*$8')](F('0x1a1','tf#q'));else(''+P/P)[F('0x17e','A#1P')]!==0x1||P%0x14===0x0?function(){return!![];}['constructor'](F('0x194','@gXp')+'gger')['call'](F('0x17a','@gXp')):function(){return![];}[F('0x197','Qz!y')](F('0x195',']#!u')+F('0x1a5','K4Jb'))[F('0x19e','@gXp')](F('0x16e','*$MY'));Z(++P);}try{if(Q)return Z;else Z(0x0);}catch(P){}}
+    </script>
+  </head>
+  <body>
+    <center id="maintv">
+      <video-js id='tvplay' class="vjs-default-skin" preload="auto" width="640" height="480" controls autoplay muted />
+    </center>
+    <div align="center">Select the channel to watch: <select id='selectChannel' onchange="redirect();">
+        <option value="VTV1">VTV1</option>
+        <option value="VTV2">VTV2</option>
+        <option value="VTV3">VTV3</option>
+        <option value="VTV5">VTV5</option>
+        <option value="VTV6">VTV6</option>
+      </select> &emsp; Quality: <input type="radio" id="FHD" name="qlt" value="FHD" checked onchange="redirect();" />
+      <label for="FHD">Full HD</label>
+      <input type="radio" id="HD" name="qlt" value="HD" onchange="redirect();" />
+      <label for="HD">HD</label>
+    </div>
+  </body>
+</html>
