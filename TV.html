@@ -9,19 +9,19 @@
     <script>
       let arr = [{
         name: "VTV1",
-        value: "https://drfamaga5qlivnt.vcdn.com.vn/vtv01/vtv01@1080p.m3u8"
+        value: "null"
       }, {
         name: "VTV2",
-        value: "https://drfamaga5qlivnt.vcdn.com.vn/vtv02/vtv02@1080p.m3u8"
+        value: "http://live-zlr1.tv360.vn/manifest/vtv2/playlist_VTV2-1080-3_6M.m3u8"
       }, {
         name: "VTV3",
-        value: "https://drfamaga5qlivnt.vcdn.com.vn/vtv03/vtv03@1080p.m3u8"
+        value: "http://live-zlr1.tv360.vn/manifest/VTV3/playlist_1080p-3M.m3u8"
       }, {
         name: "VTV5",
-        value: "https://drfamaga5qlivnt.vcdn.com.vn/vtv05/vtv05@1080p.m3u8"
+        value: "http://live-ali2.tv360.vn/manifest/VTV5_HD/playlist_1080-3_6M.m3u8"
       }, {
         name: "VTV6",
-        value: "https://drfamaga5qlivnt.vcdn.com.vn/vtv06/vtv06@1080p.m3u8"
+        value: "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8"
       }];
 
       function parse_query_string(query) {
@@ -47,7 +47,8 @@
         var radVal = $("input[name='qlt']:checked").val();
         var optVal = $("#selectChannel option:selected").val();
         console.log("Channel: " + optVal + ", Quality: " + radVal);
-        window.location.replace("?channel=" + optVal + "&quality=" + radVal);
+        window.location.replace("?channel=" + optVal);
+        <!--window.location.replace("?channel=" + optVal + "&quality=" + radVal);-->
       }
     $(function () {
 		var query = window.location.search.substring(1);
@@ -92,18 +93,18 @@
   </head>
   <body>
     <center id="maintv">
-      <video-js id='tvplay' class="vjs-default-skin" preload="auto" width="640" height="480" controls autoplay muted />
+      <video-js id='tvplay' class="vjs-default-skin" controls />
     </center>
     <div align="center">Select the channel to watch: <select id='selectChannel' onchange="redirect();">
-        <option value="VTV1">VTV1</option>
+        <!--<option value="VTV1">VTV1</option>-->
         <option value="VTV2">VTV2</option>
         <option value="VTV3">VTV3</option>
         <option value="VTV5">VTV5</option>
         <option value="VTV6">VTV6</option>
-      </select> &emsp; Quality: <input type="radio" id="FHD" name="qlt" value="FHD" checked onchange="redirect();" />
+      </select><!-- &emsp; Quality: <input type="radio" id="FHD" name="qlt" value="FHD" checked onchange="redirect();" />
       <label for="FHD">Full HD</label>
       <input type="radio" id="HD" name="qlt" value="HD" onchange="redirect();" />
-      <label for="HD">HD</label>
+      <label for="HD">HD</label>-->
     </div>
 	<script>
 		window['CboxReady'] = function(Cbox) {
