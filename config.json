@@ -2,16 +2,16 @@
     "useExternalSource": false,
     "linkData": [{
             "name": "VTV2",
-            "value": "http://live-zlr1.tv360.vn/manifest/vtv2/playlist_VTV2-1080-3_6M.m3u8"
+            "value": "https://live-zlr1.tv360.vn/manifest/vtv2/playlist_VTV2-1080-3_6M.m3u8"
         }, {
             "name": "VTV3",
-            "value": "http://live-zlr1.tv360.vn/manifest/VTV3/playlist_1080p-3M.m3u8"
+            "value": "https://live-zlr1.tv360.vn/manifest/VTV3/playlist_1080p-3M.m3u8"
         }, {
             "name": "VTV5",
-            "value": "http://live-ali2.tv360.vn/manifest/VTV5_HD/playlist_1080-3_6M.m3u8"
+            "value": "https://live-ali2.tv360.vn/manifest/VTV5_HD/playlist_1080-3_6M.m3u8"
         }, {
             "name": "VTV6",
-            "value": "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8"
+            "value": "https://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8"
         }
     ],
     "matchesData": [{
