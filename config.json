@@ -14,5 +14,9 @@
             "value": "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8"
         }
     ],
-    "matchesLink": "https://api.vebo.xyz/api/match/fixture/"
+    "matches":{
+        //"link": "https://api.vebo.xyz/api/match/fixture/",
+        "link": "https://live.vebo.xyz/api/match/live",
+        "useFixture": false
+    }
 }
