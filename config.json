@@ -15,7 +15,7 @@
         }
     ],
     "matches":{
-        "link": "https://live.vebo.xyz/api/match/live",
-        "useFixture": false
+        "https://api.vebo.xyz/api/match/fixture/",
+        "useFixture": true
     }
 }
