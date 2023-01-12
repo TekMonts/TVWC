@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <link
+      href="https://unpkg.com/video.js/dist/video-js.css"
+      rel="stylesheet"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/video.js/dist/video.js"></script>
     <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
     <script>
-      let arr = [{
-        name: "VTV1",
-        value: "null"
-      }, {
-        name: "VTV2",
-        value: "http://live-zlr1.tv360.vn/manifest/vtv2/playlist_VTV2-1080-3_6M.m3u8"
-      }, {
-        name: "VTV3",
-        value: "http://live-zlr1.tv360.vn/manifest/VTV3/playlist_1080p-3M.m3u8"
-      }, {
-        name: "VTV5",
-        value: "http://live-ali2.tv360.vn/manifest/VTV5_HD/playlist_1080-3_6M.m3u8"
-      }, {
-        name: "VTV6",
-        value: "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8"
-      }];
+      let linkData = [
+        {
+          name: "VTV2",
+          value:
+            "http://live-zlr1.tv360.vn/manifest/vtv2/playlist_VTV2-1080-3_6M.m3u8",
+        },
+        {
+          name: "VTV3",
+          value:
+            "http://live-zlr1.tv360.vn/manifest/VTV3/playlist_1080p-3M.m3u8",
+        },
+        {
+          name: "VTV5",
+          value:
+            "http://live-ali2.tv360.vn/manifest/VTV5_HD/playlist_1080-3_6M.m3u8",
+        },
+        {
+          name: "VTV6",
+          value:
+            "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8",
+        },
+      ];
 
       function parse_query_string(query) {
         var vars = query.split("&");
@@ -44,73 +53,60 @@
       }
 
       function redirect() {
-        var radVal = $("input[name='qlt']:checked").val();
         var optVal = $("#selectChannel option:selected").val();
-        console.log("Channel: " + optVal + ", Quality: " + radVal);
         window.location.replace("?channel=" + optVal);
-        <!--window.location.replace("?channel=" + optVal + "&quality=" + radVal);-->
       }
-    $(function () {
-		var query = window.location.search.substring(1);
-		var qs = parse_query_string(query);
-		var cn = 'VTV6';
-		var quality = 'FHD';
-		if (qs.hasOwnProperty('channel')) {
-			cn = qs.channel;
-		}
-		if (qs.hasOwnProperty('quality')) {
-			quality = qs.quality;
-		}
-		let obj = arr.find(o => o.name === cn);
-		document.title = 'Xem ' + obj.name + ' ' + (quality == 'FHD' ? 'Full HD' : quality) + ' free by TekMonts!';
-		var srcTV = obj.value;
-		if (quality == 'HD') {
-			srcTV = srcTV.replace('1080p', '720p');
-		}
-		$('input[name=qlt][value=' + quality + ']').prop("checked", true);
-		document.getElementById("selectChannel").value = obj.name;
-		var player = videojs('tvplay', {
-			html5: {
-				vhs: {
-					overrideNative: !videojs.browser.IS_SAFARI
-				},
-				nativeAudioTracks: false,
-				nativeVideoTracks: false
-			},
-			autoplay: true,
-			preload: "auto",
-			muted: true,
-			width: 640,
-			height: 400
-		});
-		player.src({
-			src: srcTV,
-			type: 'application/x-mpegURL',
-		});
-			player.play();
-	});
+      $(function () {
+        var query = window.location.search.substring(1);
+        var qs = parse_query_string(query);
+        document.getElementById("functional").innerHTML =
+          "Chọn kênh để xem: <select id='selectChannel' onchange='redirect();'></select>";
+        linkData.forEach((lnk) => {
+          document.getElementById("selectChannel").innerHTML +=
+            "<option value='" + lnk.name + "'>" + lnk.name + "</option>";
+        });
+        var cn = linkData[linkData.length - 1].name;
+        if (qs.hasOwnProperty("channel")) {
+          cn = qs.channel;
+        }
+        let obj = linkData.find((o) => o.name === cn);
+        document.title = "Xem " + obj.name + " Full HD free by TekMonts!";
+        var srcTV = obj.value;
+        document.getElementById("selectChannel").value = obj.name;
+        document.getElementById("mainPlayer").innerHTML =
+          "<center id='maintv'><video-js id='tvplay' class='vjs-default-skin' controls /></center>";
+        var player = videojs("tvplay", {
+          html5: {
+            vhs: {
+              overrideNative: !videojs.browser.IS_SAFARI,
+            },
+            nativeAudioTracks: false,
+            nativeVideoTracks: false,
+          },
+          autoplay: true,
+          preload: "auto",
+          muted: true,
+          width: 640,
+          height: 400,
+        });
+        player.src({
+          src: srcTV,
+          type: "application/x-mpegURL",
+        });
+        player.play();
+      });
     </script>
   </head>
   <body>
-    <center id="maintv">
-      <video-js id='tvplay' class="vjs-default-skin" controls />
-    </center>
-    <div align="center">Select the channel to watch: <select id='selectChannel' onchange="redirect();">
-        <!--<option value="VTV1">VTV1</option>-->
-        <option value="VTV2">VTV2</option>
-        <option value="VTV3">VTV3</option>
-        <option value="VTV5">VTV5</option>
-        <option value="VTV6">VTV6</option>
-      </select><!-- &emsp; Quality: <input type="radio" id="FHD" name="qlt" value="FHD" checked onchange="redirect();" />
-      <label for="FHD">Full HD</label>
-      <input type="radio" id="HD" name="qlt" value="HD" onchange="redirect();" />
-      <label for="HD">HD</label>-->
+    <div id="mainPlayer" style="align-content: center"></div>
+    <div style="text-align: center; padding-top: 10px">
+      <div id="functional"></div>
     </div>
-	<script>
-		window['CboxReady'] = function(Cbox) {
-			Cbox('button', '5-939331-zaMK0s');
-		}
-	</script>
-	<script src="https://static.cbox.ws/embed/2.js" async></script>
+    <script>
+      window["CboxReady"] = function (Cbox) {
+        Cbox("button", "5-939331-zaMK0s");
+      };
+    </script>
+    <script src="https://static.cbox.ws/embed/2.js" async></script>
   </body>
 </html>
