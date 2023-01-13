@@ -1,17 +1,20 @@
 {
-    "useExternalSource": false,
+    "useExternalSource": true,
     "linkData": [{
+            "name": "VTV1",
+            "value": "http://xemtruyenhinh.xyz/kenh/vtv1.php"
+        }, {
             "name": "VTV2",
-            "value": "http://live-zlr1.tv360.vn/manifest/vtv2/playlist_VTV2-1080-3_6M.m3u8"
+            "value": "http://xemtruyenhinh.xyz/kenh/vtv2.php"
         }, {
             "name": "VTV3",
-            "value": "http://live-zlr1.tv360.vn/manifest/VTV3/playlist_1080p-3M.m3u8"
+            "value": "http://xemtruyenhinh.xyz/kenh/vtv3.php"
         }, {
             "name": "VTV5",
-            "value": "http://live-ali2.tv360.vn/manifest/VTV5_HD/playlist_1080-3_6M.m3u8"
+            "value": "http://xemtruyenhinh.xyz/kenh/vtv5.php"
         }, {
             "name": "VTV6",
-            "value": "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8"
+            "value": "http://xemtruyenhinh.xyz/kenh/vtvcantho.php"
         }
     ],
     "matches":{
