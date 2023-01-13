@@ -2,19 +2,19 @@
     "useExternalSource": true,
     "linkData": [{
             "name": "VTV1",
-            "value": "http://xemtruyenhinh.xyz/kenh/vtv1.php"
+            "value": "https://xemtruyenhinh.xyz/kenh/vtv1.php"
         }, {
             "name": "VTV2",
-            "value": "http://xemtruyenhinh.xyz/kenh/vtv2.php"
+            "value": "https://xemtruyenhinh.xyz/kenh/vtv2.php"
         }, {
             "name": "VTV3",
-            "value": "http://xemtruyenhinh.xyz/kenh/vtv3.php"
+            "value": "https://xemtruyenhinh.xyz/kenh/vtv3.php"
         }, {
             "name": "VTV5",
-            "value": "http://xemtruyenhinh.xyz/kenh/vtv5.php"
+            "value": "https://xemtruyenhinh.xyz/kenh/vtv5.php"
         }, {
             "name": "VTV6",
-            "value": "http://xemtruyenhinh.xyz/kenh/vtvcantho.php"
+            "value": "https://xemtruyenhinh.xyz/kenh/vtvcantho.php"
         }
     ],
     "matches":{
