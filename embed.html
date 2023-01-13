@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>Tekmonts embed live stream</title>
+
+    <script src="https://cdn.peer2.network/peer2.jwplayer8.plugins.js"></script>
+
+    <script src="https://143885714.global.cdnfastest.com/jwplayer-8.20.4/jwplayer.js"></script>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    ></script>
+    <style>
+      body {
+        overflow: hidden;
+      }
+
+      #jw-container {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      .jwplayer {
+        position: absolute !important;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://odds.vebo.xyz/front/static/stylesheet/player-bet.css?v=1.0.3"
+    />
+
+    <script>
+      jwplayer.key = "7MeMRClEneUmFoHRO3u3ypzAZXlVgNtBE2pKDw==";
+    </script>
+  </head>
+  <body>
+    <div id="jw-container"></div>
+    <script>
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      var urlParser = new URL(window.location.href);
+      var url =
+        "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8";
+      var enable_p2p = false;
+      var model_id = "null";
+      var theme_id = "vebotv";
+      if (urlParser.searchParams.get("link")) {
+        url = urlParser.searchParams.get("link");
+      }
+      if (urlParser.searchParams.get("id")) {
+        model_id = urlParser.searchParams.get("id");
+      }
+      if (model_id !== null) {
+        window.enable_odds = true;
+        window.match_id = model_id;
+      } else {
+        window.enable_odds = false;
+      }
+      window.odd_page = "player";
+      window.can_close = true;
+      window.odds_base_url = "https://odds.vebo.xyz/api/odds";
+      window.close_list = {
+        "": true,
+      };
+
+      function buildStreamID(url, model_id) {
+        const urlParser = new URL(url);
+        return `${model_id}_${urlParser.pathname}`;
+      }
+
+      var player = jwplayer("jw-container");
+      player.setup({
+        sources: [{ file: url }],
+        swarmId: buildStreamID(url, model_id),
+        cast: {},
+        autostart: true,
+        preload: "auto",
+        sharing: {
+          sites: ["reddit", "facebook", "twitter"],
+        },
+        width: "100%",
+        height: "100%",
+        primary: "html5",
+        withCredentials: false,
+        muted: true,
+      });
+
+      player.once("ready", function (evt) {
+        let mypeer = new PEER2(player);
+      });
+    </script>
+  </body>
+</html>
