@@ -26,13 +26,16 @@
             padding-bottom: 0;
           "
           class="sv-link active"
-          onclick='window.location.replace("?");'
+          onclick="window.location.replace(window.location.pathname);"
           >Trang chủ</a
         >
       </h2>
     </div>
-    <div id="mainPlayer" class="container" style="width: 640; height: 440">
-    </div>
+    <div
+      id="mainPlayer"
+      class="container"
+      style="width: 640; height: 440"
+    ></div>
     <div class="container">
       <div class="box box-grid mb-0">
         <div class="box-header w-social">
@@ -191,11 +194,13 @@
     <div
       id="hits"
       style="z-index: -69"
-      class="fixed-bottom d-flex justify-content-center">
+      class="fixed-bottom d-flex justify-content-center"
+    >
       <a href="https://hits.sh/tekmonts.github.io/TVWC/">
         <img
           alt="Hits"
-          src="https://hits.sh/tekmonts.github.io/TVWC.svg?style=plastic"/>
+          src="https://hits.sh/tekmonts.github.io/TVWC.svg?style=plastic"
+        />
       </a>
     </div>
   </body>
