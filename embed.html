@@ -3,95 +3,262 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="noindex" />
-    <title>Tekmonts embed live stream</title>
-
-    <script src="https://cdn.peer2.network/peer2.jwplayer8.plugins.js"></script>
-
-    <script src="https://143885714.global.cdnfastest.com/jwplayer-8.20.4/jwplayer.js"></script>
+    <title>Player</title>
+    <script src="https://player.4shares.live/js/jwplayer/peer2.jwplayer8.plugins.js"></script>
+    <script src="https://player.4shares.live/js/jwplayer/jwplayer.js"></script>
     <script
-      type="text/javascript"
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+      type="text/javascript"
     ></script>
     <style>
       body {
         overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background: #000;
       }
-
-      #jw-container {
-        position: absolute !important;
+      #vbplayer {
         top: 0 !important;
         left: 0 !important;
         right: 0 !important;
         bottom: 0 !important;
+        /*margin: 0;
+            padding: 0;*/
+        margin-bottom: 70px;
       }
-
       .jwplayer {
         position: absolute !important;
       }
+      .jw-button-container {
+        padding: 0 !important;
+        margin-top: -6px !important;
+        /*margin-bottom: 6px !important;*/
+      }
+      .jw-icon-rewind,
+      .jw-settings-sharing {
+        display: none !important;
+      }
+      .jw-controlbar .jw-button-image {
+        max-height: 30px !important;
+      }
+      /*.jwplayer.jw-stretch-uniform .jw-media video {
+            object-fit: fill !important;
+        }*/
+      .jw-wrapper .jw-media {
+      }
+      .jw-logo-bottom-right,
+      .jw-logo-bottom-left {
+        max-width: 200px;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+      }
     </style>
+    <style>
+      #worldcup-theme {
+        position: absolute !important;
+        display: none !important;
+        z-index: -99;
+      }
+      #worldcup-theme,
+      .vbb-wrap {
+        z-index: -99;
+      }
+      .bet-flex {
+        max-width: 235px !important;
+      }
+      .jw-skip.jw-skippable,
+      .jw-skip.jw-reset {
+        top: 70px;
+      }
+      .vb-bet {
+        bottom: 45px !important;
+      }
 
+      .jwplayer .jw-plugin-vast.jw-plugin {
+        bottom: 0 !important;
+      }
+      .jw-banner {
+        max-width: 40% !important;
+        /*margin-bottom: 45px !important;*/
+      }
+      .jw-vast-nonlinear-close-button {
+        /*margin-bottom: 45px !important;*/
+      }
+    </style>
     <link
       rel="stylesheet"
-      href="https://odds.vebo.xyz/front/static/stylesheet/player-bet.css?v=1.0.3"
+      href="https://player.4shares.live/js/jwplayer/peer2.jwplayer8.plugins.js/css/player-bet.css?v=1.0.3"
     />
-
+    <script
+      defer="defer"
+      src="https://player.4shares.live/js/jwplayer/peer2.jwplayer8.plugins.js/js/chunk-vendors.8a4844f4.js"
+    ></script>
+    <script
+      defer="defer"
+      src="https://player.4shares.live/js/jwplayer/peer2.jwplayer8.plugins.js/js/app.bcb6f979.js"
+    ></script>
     <script>
       jwplayer.key = "7MeMRClEneUmFoHRO3u3ypzAZXlVgNtBE2pKDw==";
     </script>
   </head>
   <body>
-    <div id="jw-container"></div>
+    <div id="vbplayer"></div>
     <script>
-      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      var urlParser = new URL(window.location.href);
-      var url =
-        "http://live-zlr1.tv360.vn/manifest/VTV6_HD/playlist_1080p3M.m3u8";
+      //var isIOS      = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+      let jid = "vbplayer";
+      var url = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
       var enable_p2p = false;
       var model_id = "null";
       var theme_id = "vebotv";
+      var type = 1; //fb
+      var is_live = 1;
+
+      window.odd_page = "player";
+      window.can_close = true;
+      window.odds_base_url = "https://odds.vebo.xyz/api/odds";
+      window.enable_odds = false;
+
+      var urlParser = new URL(window.location.href);
       if (urlParser.searchParams.get("link")) {
         url = urlParser.searchParams.get("link");
       }
       if (urlParser.searchParams.get("id")) {
         model_id = urlParser.searchParams.get("id");
       }
+      if (urlParser.searchParams.get("is_live")) {
+        is_live = urlParser.searchParams.get("is_live");
+      }
+      if (urlParser.searchParams.get("theme_id")) {
+        theme_id = urlParser.searchParams.get("theme_id");
+      }
+      if (urlParser.searchParams.get("t")) {
+        type = urlParser.searchParams.get("t");
+      }
+      if (
+        urlParser.searchParams.get("p2p") &&
+        urlParser.searchParams.get("p2p") === "1"
+      ) {
+        enable_p2p = true;
+      }
+
       if (model_id !== null) {
         window.enable_odds = true;
         window.match_id = model_id;
-      } else {
-        window.enable_odds = false;
       }
-      window.odd_page = "player";
-      window.can_close = true;
-      window.odds_base_url = "https://odds.vebo.xyz/api/odds";
-      window.close_list = {
-        "": true,
-      };
 
+      function initOdds() {
+        if (!window.enable_odds) {
+          return false;
+        }
+        const oddsWrapper = "#worldcup-theme";
+        let intervalAdd = setInterval(() => {
+          if ($(`${oddsWrapper}`).length !== 0 || $(`#${jid}`).length === 0) {
+            clearInterval(intervalAdd);
+            return;
+          } else {
+            $(`#${jid}`).append(`<div id="worldcup-theme"></div>`);
+            if (window.odds_run) {
+              window.odds_run();
+            }
+          }
+        }, 1000);
+      }
+      function makeid(length) {
+        let result = "";
+        const characters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+          result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+          );
+          counter += 1;
+        }
+        return result;
+      }
       function buildStreamID(url, model_id) {
         const urlParser = new URL(url);
         return `${model_id}_${urlParser.pathname}`;
       }
 
-      var player = jwplayer("jw-container");
-      player.setup({
-        sources: [{ file: url }],
-        swarmId: buildStreamID(url, model_id),
-        cast: {},
-        autostart: true,
-        preload: "auto",
-        sharing: {
-          sites: ["reddit", "facebook", "twitter"],
-        },
-        width: "100%",
-        height: "100%",
-        primary: "html5",
+      let logo = {
+        hide: true,
+        margin: "0",
+        position: "",
+      };
+      let advertising = {
         withCredentials: false,
-        muted: true,
-      });
+        admessage: "Quảng cáo sẽ tự động đóng sau xx giây",
+        autoplayadsmuted: true,
+        client: "vast",
+        cuetext: "Quảng cáo",
+        preloadAds: false,
+        rules: {
+          startOnSeek: "none",
+          timeBetweenAds: 999999999,
+        },
+        skipmessage: "Có thể bỏ qua sau xx giây",
+        vpaidcontrols: true,
+        vpaidmode: "insecure",
+      };
+      advertising.schedule = [
+        {
+          offset: "pre",
+          skipoffset: 0,
+          tag: [""],
+          type: "linear",
+        },
+      ];
 
-      player.once("ready", function (evt) {
-        let mypeer = new PEER2(player);
+      var player = jwplayer(jid);
+      player
+        .setup({
+          sources: [{ file: url }],
+          swarmId: buildStreamID(url, model_id),
+          autostart: true,
+          advertising: advertising,
+          logo: logo,
+          cast: {},
+          preload: "auto",
+          sharing: { sites: ["reddit", "facebook", "twitter"] },
+          width: "100%",
+          height: "100%",
+          primary: "html5",
+          withCredentials: false,
+        })
+        .once("ready", function (evt) {
+          initOdds();
+          let peer = new PEER2(player);
+        });
+
+      function jumpBySeconds(seksToJump) {
+        var time = player.getPosition() + seksToJump;
+        if (time < 0) {
+          time = 0;
+        }
+        player.seek(time);
+      }
+      player.on("ready", function () {
+        if (is_live != 1) {
+          player.addButton(
+            "https://player.4shares.live/img/forward.svg",
+            "+10s",
+            function () {
+              jumpBySeconds(10);
+            },
+            "forward"
+          );
+          player.addButton(
+            "https://player.4shares.live/img/rewind.svg",
+            "-10s",
+            function () {
+              jumpBySeconds(-10);
+            },
+            "rewind"
+          );
+        }
       });
     </script>
   </body>
