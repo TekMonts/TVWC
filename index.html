@@ -57,7 +57,9 @@
             <br />
             <div class="sb-text">
               Cảm ơn bạn đã xem TV trên trang web của TekMonts, trang web không quảng cáo, không lợi nhuận phục vụ tất cả mọi
+																								  
               người. Nếu bạn cảm thấy trang web có ích, hãy ủng hộ tôi bằng một trong các cách dưới đây
+											 
             </div>
             <div class="clearfix"><br /></div>
             <div class="accordion accordion-flush" id="accordionFlushDonate">
@@ -191,6 +193,30 @@
           src="https://hits.sh/tekmonts.github.io/TVWC.svg?style=plastic"
         />
       </a>
-    </div>
+    </div>		
+<script>
+        // Listen for the fullscreenchange event
+		var flag = false;
+        document.addEventListener('fullscreenchange', () => {
+			flag = !flag;
+            if (flag) {
+                // Entered full-screen mode
+                rotateIframe(event.target);
+            } else {
+                // Exited full-screen mode
+                resetIframeRotation(event.target);
+            }
+        });
+
+        // Function to rotate the iframe
+        function rotateIframe(elm) {
+            elm.style.transform = 'rotate(90deg)';
+        }
+
+        // Function to reset the iframe rotation
+        function resetIframeRotation(elm) {
+            elm.style.transform = 'rotate(0deg)';
+        }
+    </script>
   </body>
 </html>
