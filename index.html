@@ -10,6 +10,40 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+	<style>
+        /* Rotate the iframe 90 degrees when the screen width is less than 600px */
+        @media screen {
+            .embedMatch {
+                transform: rotate(90deg) !important;
+            }
+        }
+    </style>
+    <script>
+        // Listen for the fullscreenchange event
+        var flag = false;
+        document.addEventListener('fullscreenchange', (event) => {
+            flag = !flag;
+            if (flag) {
+                // Entered full-screen mode
+                console.log('Entered full-screen mode');
+                rotateIframe(event.target);
+            } else {
+                // Exited full-screen mode
+                console.log('Exited full-screen mode');
+                resetIframeRotation(event.target);
+            }
+        });
+
+        // Function to rotate the iframe with a specific id
+        function rotateIframe(elm) {
+            elm.classList.add('embedMatch');
+        }
+
+        // Function to reset the rotation of the iframe with a specific id
+        function resetIframeRotation(elm) {
+            elm.classList.remove('embedMatch');
+        }
+    </script>
   </head>
   <body>
     <div style="padding-top: 20px; padding-left: 5%">
@@ -194,31 +228,5 @@
         />
       </a>
     </div>		
-<script>
-    // Listen for the fullscreenchange event
-    var flag = false;
-    document.addEventListener('fullscreenchange', (event) => {
-        flag = !flag;
-        if (flag) {
-            // Entered full-screen mode
-            console.log('Entered full-screen mode');
-            rotateIframe(event.target);
-        } else {
-            // Exited full-screen mode
-            console.log('Exited full-screen mode');
-            resetIframeRotation(event.target);
-        }
-    });
-
-    // Function to rotate the iframe
-    function rotateIframe(elm) {
-        elm.style.transform = 'rotate(90deg)';
-    }
-
-    // Function to reset the iframe rotation
-    function resetIframeRotation(elm) {
-        elm.style.transform = 'rotate(0deg)';
-    }
-</script>
   </body>
 </html>
