@@ -195,28 +195,30 @@
       </a>
     </div>		
 <script>
-        // Listen for the fullscreenchange event
-		var flag = false;
-        document.addEventListener('fullscreenchange', () => {
-			flag = !flag;
-            if (flag) {
-                // Entered full-screen mode
-                rotateIframe(event.target);
-            } else {
-                // Exited full-screen mode
-                resetIframeRotation(event.target);
-            }
-        });
-
-        // Function to rotate the iframe
-        function rotateIframe(elm) {
-            elm.style.transform = 'rotate(90deg)';
+    // Listen for the fullscreenchange event
+    var flag = false;
+    document.addEventListener('fullscreenchange', (event) => {
+        flag = !flag;
+        if (flag) {
+            // Entered full-screen mode
+            console.log('Entered full-screen mode');
+            rotateIframe(event.target);
+        } else {
+            // Exited full-screen mode
+            console.log('Exited full-screen mode');
+            resetIframeRotation(event.target);
         }
+    });
 
-        // Function to reset the iframe rotation
-        function resetIframeRotation(elm) {
-            elm.style.transform = 'rotate(0deg)';
-        }
-    </script>
+    // Function to rotate the iframe
+    function rotateIframe(elm) {
+        elm.style.transform = 'rotate(90deg)';
+    }
+
+    // Function to reset the iframe rotation
+    function resetIframeRotation(elm) {
+        elm.style.transform = 'rotate(0deg)';
+    }
+</script>
   </body>
 </html>
