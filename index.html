@@ -18,32 +18,39 @@
             }
         }
     </style>
-    <script>
-        // Listen for the fullscreenchange event
-        var flag = false;
-        document.addEventListener('fullscreenchange', (event) => {
-            flag = !flag;
-            if (flag) {
-                // Entered full-screen mode
-                console.log('Entered full-screen mode');
-                rotateIframe(event.target);
-            } else {
-                // Exited full-screen mode
-                console.log('Exited full-screen mode');
-                resetIframeRotation(event.target);
-            }
-        });
+        <script>
+    // Variable to track fullscreen state
+    let isFullScreen = false;
 
-        // Function to rotate the iframe with a specific id
-        function rotateIframe(elm) {
-            elm.classList.add('embedMatch');
-        }
+    // Listen for fullscreen change events
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 
-        // Function to reset the rotation of the iframe with a specific id
-        function resetIframeRotation(elm) {
-            elm.classList.remove('embedMatch');
+	var flag = false;
+    function handleFullscreenChange() {
+		flag = !flag;
+        if (flag) {
+            // Entered full-screen mode
+            console.log('Entered full-screen mode');
+            rotateIframe(90); // Rotate the iframe by 90 degrees
+        } else {
+            // Exited full-screen mode
+            console.log('Exited full-screen mode');
+            resetIframeRotation(); // Reset the rotation of the iframe
         }
-    </script>
+    }
+
+    // Function to rotate the iframe
+    function rotateIframe(degrees) {
+        document.body.style.transform = `rotate(${degrees}deg)`;
+    }
+
+    // Function to reset the rotation of the iframe
+    function resetIframeRotation() {
+        document.body.style.transform = 'none';
+    }
+</script>
   </head>
   <body>
     <div style="padding-top: 20px; padding-left: 5%">
