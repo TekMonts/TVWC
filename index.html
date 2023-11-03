@@ -11,47 +11,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
     <script>
-    this.fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen; // This will return true or false depending on if it's full screen or not.
+this.fullScreenMode = false;
 
-    $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange', function () {
-        this.fullScreenMode = !this.fullScreenMode;
+$(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange', function () {
+    this.fullScreenMode = !this.fullScreenMode;
+    //-Check for full screen mode and do something..
+    simulateFullScreen();
+});
 
-        //-Check for full screen mode and do something..
-        simulateFullScreen();
-    });
-
-    var simulateFullScreen = function () {
-        if (this.fullScreenMode) {
-			screen.orientation.lock("landscape-primary");
-            //docElm = document.documentElement
-            //    if (docElm.requestFullscreen)
-            //        docElm.requestFullscreen();
-			//		else {
-            //            if (docElm.mozRequestFullScreen)
-            //                docElm.mozRequestFullScreen();
-			//				else {
-            //                    if (docElm.webkitRequestFullScreen)
-            //                        docElm.webkitRequestFullScreen();
-            //                }
-            //        }
+var simulateFullScreen = function () {
+    if (this.fullScreenMode) {
+        screen.orientation.lock("landscape-primary");
+        docElm = document.documentElement
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+            } else {
+                if (docElm.mozRequestFullScreen) {
+                    docElm.mozRequestFullScreen();
+                } else {
+                    if (docElm.webkitRequestFullScreen) {
+                        docElm.webkitRequestFullScreen();
+                    }
+                }
+            }
             console.log('Setup full-screen mode successful');
+    } else {
+        screen.orientation.unlock();
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
         } else {
-			screen.orientation.unlock();
-            //if (document.exitFullscreen)
-            //    document.exitFullscreen();
-			//	else {
-            //        if (document.mozCancelFullScreen)
-            //            document.mozCancelFullScreen();
-			//			else {
-            //                if (document.webkitCancelFullScreen)
-            //                    document.webkitCancelFullScreen();
-            //            }
-            //    }
-            console.log('Exited full-screen mode successful');
+            if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else {
+                if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }
         }
-		console.log("Exit function call");
-        this.fullScreenMode = !this.fullScreenMode;  
+        console.log('Exited full-screen mode successful');
     }
+    console.log("Exit function call");
+};
     </script>
   </head>
   <body>
