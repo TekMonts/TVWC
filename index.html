@@ -33,7 +33,7 @@
                                     docElm.webkitRequestFullScreen();
                             }
                     }
-            screen.orientation.lock("landscape-primary");
+            //screen.orientation.lock("landscape-primary");
             console.log('Setup full-screen mode successful');
         } else {
             if (document.exitFullscreen)
@@ -46,7 +46,7 @@
                                 document.webkitCancelFullScreen();
                         }
                 }
-            screen.orientation.unlock();
+            //screen.orientation.unlock();
             console.log('Exited full-screen mode successful');
         }
 		console.log("Exit function call");
