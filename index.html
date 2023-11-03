@@ -22,31 +22,31 @@
 
     var simulateFullScreen = function () {
         if (this.fullScreenMode) {
-            docElm = document.documentElement
-                if (docElm.requestFullscreen)
-                    docElm.requestFullscreen();
-					else {
-                        if (docElm.mozRequestFullScreen)
-                            docElm.mozRequestFullScreen();
-							else {
-                                if (docElm.webkitRequestFullScreen)
-                                    docElm.webkitRequestFullScreen();
-                            }
-                    }
-            //screen.orientation.lock("landscape-primary");
+			screen.orientation.lock("landscape-primary");
+            //docElm = document.documentElement
+            //    if (docElm.requestFullscreen)
+            //        docElm.requestFullscreen();
+			//		else {
+            //            if (docElm.mozRequestFullScreen)
+            //                docElm.mozRequestFullScreen();
+			//				else {
+            //                    if (docElm.webkitRequestFullScreen)
+            //                        docElm.webkitRequestFullScreen();
+            //                }
+            //        }
             console.log('Setup full-screen mode successful');
         } else {
-            if (document.exitFullscreen)
-                document.exitFullscreen();
-				else {
-                    if (document.mozCancelFullScreen)
-                        document.mozCancelFullScreen();
-						else {
-                            if (document.webkitCancelFullScreen)
-                                document.webkitCancelFullScreen();
-                        }
-                }
-            //screen.orientation.unlock();
+			screen.orientation.unlock();
+            //if (document.exitFullscreen)
+            //    document.exitFullscreen();
+			//	else {
+            //        if (document.mozCancelFullScreen)
+            //            document.mozCancelFullScreen();
+			//			else {
+            //                if (document.webkitCancelFullScreen)
+            //                    document.webkitCancelFullScreen();
+            //            }
+            //    }
             console.log('Exited full-screen mode successful');
         }
 		console.log("Exit function call");
