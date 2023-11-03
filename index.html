@@ -10,47 +10,49 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-	<style>
-        /* Rotate the iframe 90 degrees when the screen width is less than 600px */
-        @media screen {
-            .embedMatch {
-                transform: rotate(90deg) !important;
-            }
-        }
-    </style>
-        <script>
-    // Variable to track fullscreen state
-    let isFullScreen = false;
+    <script>
+    this.fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen; // This will return true or false depending on if it's full screen or not.
 
-    // Listen for fullscreen change events
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange', function () {
+        this.fullScreenMode = !this.fullScreenMode;
 
-	var flag = false;
-    function handleFullscreenChange() {
-		flag = !flag;
-        if (flag) {
-            // Entered full-screen mode
-            console.log('Entered full-screen mode');
-            rotateIframe(90); // Rotate the iframe by 90 degrees
+        //-Check for full screen mode and do something..
+        simulateFullScreen();
+    });
+
+    var simulateFullScreen = function () {
+        if (this.fullScreenMode) {
+            docElm = document.documentElement
+                if (docElm.requestFullscreen)
+                    docElm.requestFullscreen();
+					else {
+                        if (docElm.mozRequestFullScreen)
+                            docElm.mozRequestFullScreen();
+							else {
+                                if (docElm.webkitRequestFullScreen)
+                                    docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+                            }
+                    }
+            screen.orientation.lock("landscape-primary");
+            console.log('Setup full-screen mode successful');
         } else {
-            // Exited full-screen mode
-            console.log('Exited full-screen mode');
-            resetIframeRotation(); // Reset the rotation of the iframe
+            if (document.exitFullscreen)
+                document.exitFullscreen();
+				else {
+                    if (document.mozCancelFullScreen)
+                        document.mozCancelFullScreen();
+						else {
+                            if (document.webkitCancelFullScreen)
+                                document.webkitCancelFullScreen();
+                        }
+                }
+            screen.orientation.unlock();
+            console.log('Exited full-screen mode successful');
         }
+		console.log("Exit function call");
+        this.fullScreenMode = !this.fullScreenMode;  
     }
-
-    // Function to rotate the iframe
-    function rotateIframe(degrees) {
-        document.body.style.transform = `rotate(${degrees}deg)`;
-    }
-
-    // Function to reset the rotation of the iframe
-    function resetIframeRotation() {
-        document.body.style.transform = 'none';
-    }
-</script>
+    </script>
   </head>
   <body>
     <div style="padding-top: 20px; padding-left: 5%">
