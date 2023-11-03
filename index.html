@@ -11,32 +11,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
     <script>
-this.fullScreenMode = false;
-
+var fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
 $(document).on('mozfullscreenchange webkitfullscreenchange fullscreenchange', function () {
-    this.fullScreenMode = !this.fullScreenMode;
-    //-Check for full screen mode and do something..
+    fullScreenMode = !fullScreenMode;
     simulateFullScreen();
 });
 
 var simulateFullScreen = function () {
-    if (this.fullScreenMode) {
-        screen.orientation.lock("landscape-primary");
-        docElm = document.documentElement
-            if (docElm.requestFullscreen) {
-                docElm.requestFullscreen();
+    if (fullScreenMode) {
+        docElm = document.documentElement;
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+        } else {
+            if (docElm.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
             } else {
-                if (docElm.mozRequestFullScreen) {
-                    docElm.mozRequestFullScreen();
-                } else {
-                    if (docElm.webkitRequestFullScreen) {
-                        docElm.webkitRequestFullScreen();
-                    }
+                if (docElm.webkitRequestFullScreen) {
+                    docElm.webkitRequestFullScreen();
                 }
             }
-            console.log('Setup full-screen mode successful');
+        }
+		screen.orientation.lock("landscape-primary");
+        console.log('Setup full-screen mode successful');
     } else {
-        screen.orientation.unlock();
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else {
@@ -48,9 +45,11 @@ var simulateFullScreen = function () {
                 }
             }
         }
+		screen.orientation.unlock();
         console.log('Exited full-screen mode successful');
     }
     console.log("Exit function call");
+    //fullScreenMode = !fullScreenMode;
 };
     </script>
   </head>
